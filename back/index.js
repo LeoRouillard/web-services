@@ -4,8 +4,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+
 const userRoutes = require("./routes/userRoute");
 const adsRoutes = require("./routes/adsRoute");
+const categoryRoutes = require("./routes/categoryRoute");
 
 dotenv.config();
 
@@ -23,6 +25,7 @@ app.use(bodyParser.json());
 
 //app.use("/api/users", userRoutes);
 app.use("/api/ads", adsRoutes);
+app.use("/api/category", categoryRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Backend server is running!");

@@ -3,7 +3,7 @@ const Ads = require("../models/adsModel");
 exports.findAll = async (req, res) => {
   const query = req.query.new;
   try {
-    const users = query
+    const ads = query
       ? await Ads.find().sort({ _id: -1 })
       : await Ads.find();
     res.status(200).json(ads);
@@ -45,7 +45,8 @@ exports.create = async (req, res) => {
                 image: req.body.image,
                 adress: req.body.adress,
                 isPublish: false,
-                //owner: "ee"
+                //owner: "ee",
+                //buyer:
               });
             
               ads.save().then(data => {
