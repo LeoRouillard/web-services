@@ -24,7 +24,7 @@ exports.findById = async (req, res) => {
 exports.delete = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("ads has been deleted");
+        res.status(200).json("Ads has been deleted");
     } catch (error) {
         res.status(500).json(error);
     }
@@ -35,9 +35,26 @@ exports.create = async (req, res) => {
         if(!req.body){
             return res.status(400).send({message: "All fields are required"})
         } else {
-                
+            console.log(req.body)
+            const ads = new Ads({
+                createdAt: new Date(),
+                title: req.body.title,
+                description: req.body.description,
+                price: req.body.price,
+                //category: req.body.category,
+                image: req.body.image,
+                adress: req.body.adress,
+                isPublish: false,
+                //owner: "ee"
+              });
+            
+              ads.save().then(data => {
+                res.send(data);
+              }).catch(err => {
+                res.status(500).send({ message: err.message || 'probleme creation ads' });
+              });
         }
     } catch (error) {
-        
+        res.status(500).send({ message: err.message || 'probleme creation ads' });
     }
 }
