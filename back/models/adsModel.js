@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
 
-const Ads = mongoose.model(
-    'Ads',
+const AdsSchema = new mongoose.Schema(
     {
         createdAt: { type: Date, required: true },
         intitule: { type: String, required: true },
@@ -11,7 +10,9 @@ const Ads = mongoose.model(
         image: { type: String, required: true },
         adresse: { type: String, required: true },
         publiee: { type: Boolean, required: true },
+        owner: { type: mongoose.Schema.Types.ObjectId, required: true },
+        buyer: { type: mongoose.Schema.Types.ObjectId, required: false },
     },
   );
   
-  export default Ads;
+module.exports = mongoose.model('Ads', AdsSchema);
